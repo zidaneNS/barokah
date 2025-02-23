@@ -31,9 +31,16 @@ Primary Key, INT | Foreign Key -> Users | INT | ENUM(PENDING, PROCESS, SUCCESS)
 ---
 
 ### Carts
+id | order_id | product_id |
+---|---------|------------|
+Primary Key, INT | Foreign Key -> Orders | Foreign Key -> Products |
+
+---
+
+### cart_product (pivot)
 id | cart_id | product_id | quantity | price
 ---|---------|------------|----------|-------
-Primary Key, INT | Foreign Key -> Orders | Foreign Key -> Products | INT | INT
+Primary Key, INT | Foreign Key -> Carts | Foreign Key -> Products | INT | INT
 
 ---
 
@@ -159,12 +166,21 @@ Primary Key, INT | Foreign Key -> Orders | VARCHAR
 ---
 ### 3. Product Ordering
 * Customer:
-  * can add products to cart
+  * can add products to available order
+  * can add products to new order
   * can delete products on cart
   * can checkout cart to order
 
 ### Frontend
-* Add to Cart :
+* Add to available Order :
+```json
+{
+    "product_id": int,
+    "quantity": int,
+    "order_id": int
+}
+```
+* Add to new Order :
 ```json
 {
     "product_id": int,
