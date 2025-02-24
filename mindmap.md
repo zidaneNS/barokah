@@ -31,9 +31,9 @@ Primary Key, INT | Foreign Key -> Users | INT | ENUM(PENDING, PROCESS, SUCCESS)
 ---
 
 ### Carts
-id | order_id | product_id |
----|---------|------------|
-Primary Key, INT | Foreign Key -> Orders | Foreign Key -> Products |
+id | order_id |
+---|---------|
+Primary Key, INT | Foreign Key -> Orders |
 
 ---
 
@@ -170,6 +170,8 @@ Primary Key, INT | Foreign Key -> Orders | VARCHAR
   * can add products to new order
   * can delete products on cart
   * can checkout cart to order
+  * can update quantity
+  * can get all orders
 
 ### Frontend
 * Add to available Order :
@@ -199,6 +201,14 @@ Primary Key, INT | Foreign Key -> Orders | VARCHAR
     "payment_method": string
 }
 ```
+* Update Quantity :
+```json
+{
+    "cart_id": int,
+    "quantity": int,
+    "order_id": int
+}
+```
 
 ### Backend
 * Add to Cart :
@@ -209,6 +219,9 @@ Primary Key, INT | Foreign Key -> Orders | VARCHAR
   * if valid delete product from cart
 * Checkout :
   * on payment feature for more information
+* Update Quantity :
+  * receive credentials (cart_id, quantity)
+  * if valid update quantity
 ---
 ### 4. Payment
 * Customer:
